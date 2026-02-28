@@ -53,7 +53,20 @@ func _ready():
 		camera.fov = fov
 	_setup_stamina_ui()
 
+func _unhandled_input(event):
+	if event is InputEventMouseButton and event.pressed:
+		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
 func _input(event):
+	
+	
+	if event.is_action_pressed("ui_cancel"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
+	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
+		return
+	
 	if event is InputEventMouseMotion:
 		var x_dir = -1 if invert_y else 1
 		var y_dir = -1 if invert_x else 1
@@ -64,6 +77,9 @@ func _input(event):
 			camera.rotation_degrees.x = pitch
 
 func _physics_process(delta):
+	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
+		return
+	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
