@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://daqscwmgqw7w4"]
+
+[ext_resource type="Script" uid="uid://dnvpujoae5y1q" path="res://addons/Basic CharacterBody3D/player.gd" id="1_bm4tl"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_t5sc4"]
+
+[node name="Player" type="CharacterBody3D" unique_id=855109756 node_paths=PackedStringArray("camera", "stamina_progress_bar")]
+script = ExtResource("1_bm4tl")
+camera = NodePath("Camera3D")
+stamina_ui_type = 1
+stamina_progress_bar = NodePath("StaminaBar/ProgressBar")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1373789900]
+shape = SubResource("CapsuleShape3D_t5sc4")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=765706592]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.33908606, 0)
+
+[node name="StaminaBar" type="Control" parent="." unique_id=141526390]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ProgressBar" type="ProgressBar" parent="StaminaBar" unique_id=196797801]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 13.0
+offset_right = 958.0
+offset_bottom = 40.0
+show_percentage = false
